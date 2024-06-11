@@ -185,6 +185,10 @@ class DatabaseManager:
             self.cursor.execute("UPDATE leaderboard SET standing = ? WHERE did = ?", (player2_standing, player1_did))
             self.cursor.execute("UPDATE leaderboard SET standing = ? WHERE did = ?", (player1_standing, player2_did))
             self.conn.commit()
+    
+    def delete_player(self, did):
+        self.cursor.execute("DELETE FROM leaderboard WHERE did = ?", (did,))
+        self.conn.commit()
 
     def close(self):
         self.conn.close()

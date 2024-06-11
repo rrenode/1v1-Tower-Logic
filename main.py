@@ -235,6 +235,7 @@ class Bot:
             #cm.db_manager.update_player_last_loss(ctx_user.id, None)
             new_position = callout.for_position_num
             if new_position == 20:
+                cm.db_manager.delete_player(challengee_did)
                 # Discord message
                 print("Congrdulations on the promotion and welcome to The List!")
             # Discord message
@@ -274,24 +275,25 @@ trainee =   DiscordUser(rows[30][0], rows[30][1])
 # though the challengee may contest the ruling if, and only if, the challenger put, in the opinion of the moderator, 
 # too little effort into scheduling a match. Challengee can report in thread if there is scheduling problems on the challenger's 
 # end but must do so 6 hours prior to the 48 hour rule ending.
-# - What happens when the 72 hour (now 48 hour) rule elapses and no game has been played?
+# || What happens when the 72 hour (now 48 hour) rule elapses and no game has been played?
 #   - Is the strain on the challenger or the challengee? OR
 #   - Is it context dependant? If so, should I add functionality to ping a 1v1s tower mod for them to make a decision?.
 #
-#   - RESOLVED: Make threads.
-# - Bot states in thread: "Make sure all communication regarding the callout remains in the thread."
-# - I can make it so that when someone calls someone out, a new thread is automatically created that only the
+#   - RESOLVED: Make threads. Only the two players that are a part of the callout can use text chat in the thread; this would 
+# have to be done through the bot as permissions are applied accross all posts in a form. Bot states in thread: "Make sure all
+# communication regarding the callout remains in the thread."
+# || I can make it so that when someone calls someone out, a new thread is automatically created that only the
 # challenger and the challenged (as well as mods) can message in. We can then restrict the rest of the commands to only 
 # work in the callout threads. The benefits are two fold, organization assiting with moderation and programming the bot
 # becomes easier because then I can simply assign the new thread id to the callout id.
 #
 #   - RESOLVED: Players can only have one callout active on them
-# - Speaking of which, currently callouts are handled in that players can only have one active callout that they made 
+# || Speaking of which, currently callouts are handled in that players can only have one active callout that they made 
 # and only have one active callout from others. Is a queue system prefered or do you prefer that people wait for the 
 # callout to finish and those who wanted to challenge that player just try to callout that guy first?
 #
-#   - Resolved: 48 hour rule covers this.
-# - Scenario 2 can't really be enforced through a bot unless we also make players use a command to schedule their game.
+#   - RESOLVED: 48 hour rule covers this.
+# || Scenario 2 can't really be enforced through a bot unless we also make players use a command to schedule their game.
 # With that then comes, how are they punished. So, I personally say that this scenario is pointless to code other than.
 #
 # - Players are expected to challenge up, inform them
@@ -327,16 +329,18 @@ trainee =   DiscordUser(rows[30][0], rows[30][1])
 #                   Tests
 # ==========================================
 # Number 2 spot challenges the number 1 spot
-
+"""
 bot.callout(dunion) # Pos_2 calls out Pos_1 || Callout created
 bot.accept_callout(rubben) # Pos_1 accepts || Nice
 bot.report(dunion, "win")
-
+"""
 
 # Promotion game from waitlist into the rankings
-#bot.callout(rob)
-#bot.accept_callout(herrobear)
-#bot.report(rob, "win")
+"""
+bot.callout(rob)
+bot.accept_callout(herrobear)
+bot.report(rob, "win")
+"""
 
 # [Scenario 1 & 3] Player loses to challenger, goes down, and can't challenge for 24 hours
 # or until another challenges them. Scenarios 1 and 3 are the same scenario, 3 only being an extension.
