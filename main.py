@@ -1,7 +1,18 @@
 from datetime import datetime, timedelta
 import csv
+import yaml
 
 from callout import CalloutManager
+
+# yaml config reader
+def load_conf_file(config_file):
+    try:
+        with open(config_file, 'r') as file:
+            config = yaml.safe_load(file)
+            return config
+    except Exception as e:
+        print(f"Unable to load yaml config file: \n {e}")
+        return None
 
 cm = CalloutManager()
 
