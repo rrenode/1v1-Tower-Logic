@@ -254,7 +254,7 @@ class Bot:
 
 bot = Bot()
 
-refresh_database()
+#refresh_database()
 rows = get_players_csv()
 
 rubben =    DiscordUser(rows[0][0],  rows[0][1])
